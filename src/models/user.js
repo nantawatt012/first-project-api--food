@@ -36,8 +36,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("customer", "seller", "admin"),
         allowNull: false
       },
-      profileImage: DataTypes.STRING,
-      profileCover: DataTypes.STRING,
       discountId: DataTypes.STRING
     },
     { underscored: true }
@@ -68,6 +66,17 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(
       db.Cart,
+      {
+        foreignKey: { name: "UserId" },
+        allowNull: false
+      },
+      {
+        onDelete: "RESTRICT"
+      }
+    );
+
+    User.hasMany(
+      db.UserImage,
       {
         foreignKey: { name: "UserId" },
         allowNull: false
