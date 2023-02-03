@@ -39,12 +39,7 @@ exports.login = async (req, res, next) => {
   try {
     const value = validateLogin(req.body);
     const user = await User.findOne({
-      where: {
-        [Op.or]: [
-          { email: value.emailOrMobile },
-          { mobile: value.emailOrMobile }
-        ]
-      }
+      where: { email: value.email }
     });
     if (!user) {
       createError("invalid email or mobile or password", 400);

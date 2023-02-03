@@ -37,7 +37,7 @@ exports.validateRegister = validate(registerSchema);
 ///////////////////////////////////////////////////////////////
 
 const loginSchema = Joi.object({
-  emailOrMobile: Joi.string().required(),
+  email: Joi.string().required(),
   password: Joi.string().required()
 });
 exports.validateLogin = validate(loginSchema);
