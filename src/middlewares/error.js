@@ -1,4 +1,5 @@
-module.exports = (err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ messsage: err.message });
+module.exports = (mes, statusCode) => {
+  const error = new Error(mes);
+  error.statusCode = statusCode;
+  throw error;
 };
