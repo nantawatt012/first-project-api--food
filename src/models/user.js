@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       {
-        onDelete: "RESTRICT"
+        onDelete: "CASCADE"
       }
     );
 
@@ -77,6 +77,17 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(
       db.UserImage,
+      {
+        foreignKey: { name: "UserId" },
+        allowNull: false
+      },
+      {
+        onDelete: "RESTRICT"
+      }
+    );
+
+    User.hasMany(
+      db.Order,
       {
         foreignKey: { name: "UserId" },
         allowNull: false

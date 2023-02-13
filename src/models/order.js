@@ -1,21 +1,26 @@
 module.exports = (sequelize, DataTypes) => {
-  const Order = sequelize.define("Order", {}, { underscored: true });
+  const Order = sequelize.define(
+    "Order",
+    {
+      sumAmount: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validator: {
+          notEmpty: true
+        }
+      },
+      isComplete: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
+    },
+    { underscored: true }
+  );
   Order.associate = (db) => {
     Order.belongsTo(
-      db.Address,
+      db.User,
       {
-        foreignKey: { name: "addressId" },
-        allowNull: false
-      },
-      {
-        onDelete: "RESTRICT"
-      }
-    );
-
-    Order.hasMany(
-      db.Payment,
-      {
-        foreignKey: { name: "orderId" },
+        foreignKey: { name: "userId" },
         allowNull: false
       },
       {

@@ -1,5 +1,5 @@
 const { validateCreateItem } = require("../validators/item-validator");
-const { Product, User } = require("../models");
+const { Product, User, Cart } = require("../models");
 const createError = require("../utils/create-error");
 
 exports.getShopOwner = async (req, res, next) => {
@@ -64,6 +64,18 @@ exports.createItem = async (req, res, next) => {
 
     const item = await Product.create(value);
     res.status(201).json({ item });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.addItem = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const itemId = req.body.items.id;
+    // console.log("userIdddddd", userId);
+    // console.log("inputttttttt", itemId);
+    await Cart.create({ amount: 1, userId: userId, productId: itemId });
   } catch (err) {
     next(err);
   }
