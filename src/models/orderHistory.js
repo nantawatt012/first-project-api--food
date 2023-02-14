@@ -9,13 +9,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
-      productId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
+
       amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -34,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: { name: "orderId" },
         allowNull: false
       },
+      {
+        onDelete: "RESTRICT"
+      }
+    );
+
+    OrderHistory.belongsTo(
+      db.Product,
+      { foreignKey: { name: "productId" }, allowNull: false },
       {
         onDelete: "RESTRICT"
       }

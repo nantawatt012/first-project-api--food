@@ -12,9 +12,11 @@ const rateLimit = require("express-rate-limit");
 const authRoute = require("./routes/auth-route");
 const shopRoute = require("./routes/shop-route");
 const cartRoute = require("./routes/cart-route");
+const homeRoute = require("./routes/home-route");
+const orderRoute = require("./routes/order-route");
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error");
-const authenticateUser = require("./middlewares/authenticate");
+// const authenticateUser = require("./middlewares/authenticate");
 
 const app = express();
 
@@ -34,6 +36,8 @@ app.use(express.json());
 app.use("/auth", authRoute);
 app.use("/shop", shopRoute);
 app.use("/cart", cartRoute);
+app.use("/home", homeRoute);
+app.use("/order", orderRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         validator: {
           notEmpty: true
         }
-      },
-      isComplete: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
       }
     },
     { underscored: true }
@@ -38,6 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "RESTRICT"
       }
     );
+
+    Order.hasMany(db.Payment, {
+      foreignKey: { name: "orderId" },
+      allowNull: false
+    });
   };
   return Order;
 };

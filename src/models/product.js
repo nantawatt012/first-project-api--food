@@ -60,8 +60,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       {
-        onDelete: "RESTRICT"
+        onDelete: "CASCADE"
       }
+    );
+
+    Product.hasMany(
+      db.OrderHistory,
+      { foreignKey: { name: "productId" }, allowNull: false },
+      { onDelete: "RESTRICT" }
     );
   };
   return Product;
