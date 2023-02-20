@@ -4,7 +4,7 @@ const sequelize = require("sequelize");
 exports.getCart = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    console.log(req.params);
+    // console.log(req.params);
     const cartData = await Cart.findAll({
       attributes: [
         "productId",

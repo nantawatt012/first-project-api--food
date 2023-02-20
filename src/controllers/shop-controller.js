@@ -6,7 +6,7 @@ exports.getShopOwner = async (req, res, next) => {
   try {
     const { shopId } = req.params;
     const ownerName = await User.findOne({ where: { id: shopId } });
-    console.log(ownerName);
+    // console.log(ownerName);
     if (ownerName.dataValues.role !== "seller") {
       createError("Not a seller", 400);
     }
@@ -75,7 +75,12 @@ exports.addItem = async (req, res, next) => {
     const itemId = req.body.items.id;
     // console.log("userIdddddd", userId);
     // console.log("inputttttttt", itemId);
-    await Cart.create({ amount: 1, userId: userId, productId: itemId });
+    const result = await Cart.create({
+      amount: 1,
+      userId: userId,
+      productId: itemId
+    });
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }

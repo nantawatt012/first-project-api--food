@@ -1,7 +1,7 @@
 const { OrderHistory, Order, Product } = require("../models");
 const { Op } = require("sequelize");
 
-exports.orderList = async (req, res, next) => {
+exports.lastOrderList = async (req, res, next) => {
   try {
     // console.log(req.user.id);
     const lastOrder = await Order.max("id", { where: { userId: req.user.id } });
